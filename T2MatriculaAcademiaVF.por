@@ -49,7 +49,7 @@ programa
 		confirma='s'
 
 		faca{
-		para(inteiro d=0; d < 2; d++){//dados(coluna)
+			para(inteiro d=0; d < 2; d++){//dados(coluna)
 				se(matriculaC[a][d]==""){
 					escreva("Insira sua matrícula: ")
 					leia(matriculaC[a][0])
@@ -66,7 +66,13 @@ programa
 					Util.aguarde(2200)
 				}
 			}
-			a++
+			se(a<30){
+				a++
+			}
+			senao{
+				escreva("\nMatrículas lotadas!\n")
+				matriculado=verdadeiro
+			}
 		}enquanto(matriculado==falso)
 		matriculado=falso
 		limpa()
@@ -101,9 +107,7 @@ programa
 		escreva("Informe sua matrícula: ")
 		leia(matric)
 		para(inteiro a=0; a < 30; a++){
-			para(inteiro d=0; d < 1; d++){
 				se(matric==matriculaC[a][0]){
-					existe=verdadeiro
 					escreva("Insira a data: (dd/mm)")
 					leia(data)
 					escreva("Qual aula?(1=Musculação/2=Funcional) ")
@@ -111,17 +115,18 @@ programa
 					se(tipoAula==1){
 					matriculaC[a][2]="Musculação"
 						musc++
+						existe=verdadeiro
 					}
 					senao se(tipoAula==2){
 						matriculaC[a][3]="Funcional"
 						func++
+						existe=verdadeiro
 					}
 					senao{
 						escreva("* Aula inválida *")
 					}
 				}
 			}
-		}
 		se(existe==verdadeiro){
 			escreva("\nAula registrada com sucesso\n")
 			Util.aguarde(3000)
@@ -161,7 +166,7 @@ programa
 	funcao faturar(){
 		inteiro totalM=0,totalAu=func+musc,totalAl=0
 		real faturaM, faturaA, faturaT
-		para(inteiro i=0; i < 10; i++){
+		para(inteiro i=0; i < 30; i++){
 			se(matriculaC[i][0]!=""){
 				totalM++
 			}
@@ -186,7 +191,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1870; 
+ * @POSICAO-CURSOR = 1549; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {matriculaC, 5, 8, 10}-{armarios, 5, 27, 8};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

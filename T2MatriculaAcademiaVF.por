@@ -25,8 +25,8 @@ programa
 				caso 5:
 				escreva("Tem certeza que deseja finalizar? (s/n) ")
 				leia(confirm)
-				se(confirm == 'S'){//correção de caixa alta para caixa baixa
-					confirm = 's'
+				se(confirm == 'S'){//correção de caixa alta
+					confirm = 's'//para caixa baixa
 				}
 				pare
 				caso contrario:
@@ -36,7 +36,7 @@ programa
 				limpa()
 				pare
 				}
-		}enquanto(confirm!='s')//confrimação para caso 5 (Sair do Programa (s/n))
+		}enquanto(confirm!='s')//confirmação para caso 5 (Sair do Programa (s/n))
 		
 	}
 	funcao menu(){//Matheus
@@ -95,32 +95,31 @@ programa
 				escreva("Armário inexistente\n")
 			}
 		}enquanto(disponivel==verdadeiro)
-		disponivel=verdadeiro//condição para voltar ao looping armário
+		disponivel=verdadeiro//condição para voltar ao looping armário na próxima execução da funcao
 	}
 	
 	funcao aula(){//Kenji
 		cadeia matric, data
-		inteiro tipoAula
+		inteiro tipoAula// 1-Musculação, 2-Personal
 		logico existe = falso
 		escreva("Informe sua matrícula: ")
 		leia(matric)
-		para(inteiro a=0; a < 30; a++){//aluno(linha)
+		para(inteiro a=0; a < 30; a++){//a=aluno(linha)
 			se(matric==matriculaC[a][0]){
+				existe=verdadeiro
 				escreva("Insira a data: (dd/mm)")
 				leia(data)
 				escreva("Qual aula?(1=Musculação/2=Funcional) ")
 				leia(tipoAula)
 				se(tipoAula==1){
-				matriculaC[a][2]="Musculação"
+					matriculaC[a][2]="Musculação"
 					musc++
-					existe=verdadeiro
 					escreva("\nAula registrada com sucesso\n")
 					Util.aguarde(3000)
 				}
 				senao se(tipoAula==2){
 					matriculaC[a][3]="Funcional"
 					func++
-					existe=verdadeiro
 					escreva("\nAula registrada com sucesso\n")
 					Util.aguarde(3000)
 				}
@@ -139,21 +138,21 @@ programa
 		escreva("\n----------- Listagem de armários -----------\n")
 		para(inteiro i=0; i < 30; i++){
 			se(armarios[i]==""){
-				se(i<9){
+				se(i<9){//armários de 1 a 9 serão exibidos como 01 a 09, para alinhar corretamente na lista
 					escreva("0",i+1,":Livre ")
 				}
 				senao{
 					escreva(i+1,":Livre ")
 				}
 			}
-			senao se(i<9){
+			senao se(i<9){//armários de 1 a 9 serão exibidos como 01 a 09, para alinhar corretamente na lista
 				escreva("0",i+1,":Cheio ")
 			}
 			senao{
 				escreva(i+1,":Cheio ")
 			}
 			
-			se(i==4 ou i==9 ou i==14 ou i==19 ou i==24){
+			se(i==4 ou i==9 ou i==14 ou i==19 ou i==24){//a cada 5 armários, pula 1 linha. Por organização
 				escreva("\n")
 			}
 		}
@@ -169,13 +168,13 @@ programa
 				totalM++
 			}
 		}
-		para(inteiro a=0; a < 30; a++){
-			se(matriculaC[a][2]!="" ou matriculaC[a][3]!=""){
-				totalAl++
+		para(inteiro a=0; a < 30; a++){//verificar cada linha da matriz (cada aluno)
+			se(matriculaC[a][2]!="" ou matriculaC[a][3]!=""){//se há aulas ou não na linha
+				totalAl++//para adicionar +1 para o total de alunos atendidos
 			}
 		}
 		
-		faturaM = totalM*200.0
+		faturaM = totalM*200.0//200 reais por matrícula
 		faturaA = (musc*100.0)+(func*80.0)
 		faturaT = faturaM+faturaA
 		limpa()
@@ -189,7 +188,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3760; 
+ * @POSICAO-CURSOR = 3882; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {matriculaC, 5, 8, 10}-{armarios, 5, 27, 8};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

@@ -1,31 +1,31 @@
 programa
 {
-	inclua biblioteca Util
-	inteiro musc=0,func=0
-	cadeia matriculaC[30][4], armarios[30]
-	logico disponivel=verdadeiro, matriculado=falso
-	funcao inicio()
+	inclua biblioteca Util//Utilizado para aguardar antes de executar a próxima linha
+	inteiro musc=0,func=0//quantidade de aulas de musculação e funcional
+	cadeia matriculaC[30][4], armarios[30]//Matriz(Matrícula, nome, aula de musc, aula func)
+	logico disponivel=verdadeiro, matriculado=falso//condições para executar ou não estruturas de repetição
+	funcao inicio()//Letícia
 	{
-		inteiro opcao
-		caracter confirm='n'
+		inteiro opcao//opcao do menu escolha caso
+		caracter confirm='n'//confrimação para caso 5 (Sair do Programa (s/n))
 	
 		faca{
-			menu()
+			menu()//Menu inicial de opções 1 - 5
 			escreva("Escolha uma das opções: ")
 			leia(opcao)
 				escolha(opcao){
-				caso 1: matriculas()
+				caso 1: matriculas()//Matheus
 				pare
-				caso 2: aula()
+				caso 2: aula()//Kenji
 				pare
-				caso 3: lista()
+				caso 3: lista()//Letícia
 				pare
-				caso 4: faturar()
+				caso 4: faturar()//Paola
 				pare
 				caso 5:
 				escreva("Tem certeza que deseja finalizar? (s/n) ")
 				leia(confirm)
-				se(confirm == 'S'){
+				se(confirm == 'S'){//correção de caixa alta para caixa baixa
 					confirm = 's'
 				}
 				pare
@@ -36,53 +36,51 @@ programa
 				limpa()
 				pare
 				}
-		}enquanto(confirm!='s')
+		}enquanto(confirm!='s')//confrimação para caso 5 (Sair do Programa (s/n))
 		
 	}
-	funcao menu(){
+	funcao menu(){//Matheus
 		escreva("ACADEMIA - FORÇA TOTAL\n----------------------------------\n1 - Nova Matrícula\n2 - Aula Personal\n3 - Listar Armários\n4 - Faturamento\n5 - Sair do Programa\n----------------------------------\n\n")
 	}
-	funcao matriculas(){
+	funcao matriculas(){//Matheus
 		limpa()
 		inteiro a=0//alunos(linha)
-		caracter confirma, arm = 'n'
-		confirma='s'
+		caracter arm = 'n'//confirmação para se o cliente deseja um armário
 
 		faca{
-			para(inteiro d=0; d < 2; d++){//dados(coluna)
-				se(matriculaC[a][d]==""){
+			para(inteiro d=0; d < 2; d++){//d=dados(coluna): coluna 0=matrícula, 1=nome, 2=Aula de musculação, 3=Aula funcional 
+				se(matriculaC[a][d]==""){//se nº da matrícula ou nome estiverem vazios
 					escreva("Insira sua matrícula: ")
 					leia(matriculaC[a][0])
 					escreva("Insira seu nome: ")
 					leia(matriculaC[a][1])
 					escreva("Deseja um armário? (s/n) ")
 					leia(arm)
-					disponivel=verdadeiro
 					se(arm=='s' ou arm=='S'){
 						armario()
 					}
 					escreva("* Matrícula registrada com sucesso! *\n")
-					matriculado=verdadeiro
+					matriculado=verdadeiro//encerrará o looping
 					Util.aguarde(2200)
 				}
 			}
 			se(a<30){
-				a++
+				a++//depois de checar uma linha, ir para a próxima
 			}
 			senao{
 				escreva("\nMatrículas lotadas!\n")
-				matriculado=verdadeiro
+				matriculado=verdadeiro//para impedir repetição infinita
 			}
 		}enquanto(matriculado==falso)
 		matriculado=falso
 		limpa()
 	}
-	funcao armario(){
-		inteiro p
-		faca{
+	funcao armario(){//Bernardo
+		inteiro p//posição do armário
+		faca{//repetir enquanto não digitar um armário válido
 			escreva("Qual armário deseja?(1-30) ")
 			leia(p)
-			p-=1
+			p-=1//O armario 1 = A posição 0 no vetor, que o cliente não sabe
 			se(p>=0 e p <30){
 				se(armarios[p]==""){
 					disponivel=falso
@@ -91,53 +89,53 @@ programa
 				}
 				senao{
 					escreva("Armário ocupado!\n")
-				
 				}
 			}
 			senao{
 				escreva("Armário inexistente\n")
 			}
 		}enquanto(disponivel==verdadeiro)
+		disponivel=verdadeiro//condição para voltar ao looping armário
 	}
 	
-	funcao aula(){
+	funcao aula(){//Kenji
 		cadeia matric, data
 		inteiro tipoAula
 		logico existe = falso
 		escreva("Informe sua matrícula: ")
 		leia(matric)
-		para(inteiro a=0; a < 30; a++){
-				se(matric==matriculaC[a][0]){
-					escreva("Insira a data: (dd/mm)")
-					leia(data)
-					escreva("Qual aula?(1=Musculação/2=Funcional) ")
-					leia(tipoAula)
-					se(tipoAula==1){
-					matriculaC[a][2]="Musculação"
-						musc++
-						existe=verdadeiro
-					}
-					senao se(tipoAula==2){
-						matriculaC[a][3]="Funcional"
-						func++
-						existe=verdadeiro
-					}
-					senao{
-						escreva("* Aula inválida *")
-					}
+		para(inteiro a=0; a < 30; a++){//aluno(linha)
+			se(matric==matriculaC[a][0]){
+				escreva("Insira a data: (dd/mm)")
+				leia(data)
+				escreva("Qual aula?(1=Musculação/2=Funcional) ")
+				leia(tipoAula)
+				se(tipoAula==1){
+				matriculaC[a][2]="Musculação"
+					musc++
+					existe=verdadeiro
+					escreva("\nAula registrada com sucesso\n")
+					Util.aguarde(3000)
+				}
+				senao se(tipoAula==2){
+					matriculaC[a][3]="Funcional"
+					func++
+					existe=verdadeiro
+					escreva("\nAula registrada com sucesso\n")
+					Util.aguarde(3000)
+				}
+				senao{
+					escreva("* Aula inválida *")
 				}
 			}
-		se(existe==verdadeiro){
-			escreva("\nAula registrada com sucesso\n")
-			Util.aguarde(3000)
 		}
 		se(existe==falso){
-			escreva("\n* Matrícula não encontrada! *\n")
-			Util.aguarde(3000)
+		escreva("\n* Matrícula não encontrada! *\n")
+		Util.aguarde(3000)
 		}
 		existe=falso
 	}
-	funcao lista(){
+	funcao lista(){//Letícia
 		escreva("\n----------- Listagem de armários -----------\n")
 		para(inteiro i=0; i < 30; i++){
 			se(armarios[i]==""){
@@ -163,9 +161,9 @@ programa
 		Util.aguarde(5000)
 		
 	}
-	funcao faturar(){
-		inteiro totalM=0,totalAu=func+musc,totalAl=0
-		real faturaM, faturaA, faturaT
+	funcao faturar(){//Paola
+		inteiro totalM=0,totalAu=func+musc,totalAl=0//TotalMatriculas, TotalAulas,TotalAlunos
+		real faturaM, faturaA, faturaT//FaturamentoMatrículas, FaturamentoAulas,FaturamentoTotal
 		para(inteiro i=0; i < 30; i++){
 			se(matriculaC[i][0]!=""){
 				totalM++
@@ -191,7 +189,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1549; 
+ * @POSICAO-CURSOR = 3760; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {matriculaC, 5, 8, 10}-{armarios, 5, 27, 8};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
